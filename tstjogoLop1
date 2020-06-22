@@ -1,0 +1,21 @@
+
+var x = 0;
+var y = 0;
+function setup() {
+  createCanvas(600, 600);
+  //Roda apenas uma vez;
+  //Preparação do jogo;
+}
+
+function draw() {
+  //R, G , B
+  //Red (Vermelho), Green (Verde), Blue (Azul);
+  //Cada uma varia de 0 a 255 cores;
+  //Podem variar de forma decimal, hexadecimal;
+  background(200,0,0);
+  ellipse(x, y, 55, 55);
+  x, y = random(1,10)
+  x = x + 1;
+  y = y + 2;
+  
+}
