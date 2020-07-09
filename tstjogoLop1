@@ -1,10 +1,25 @@
-
-var x = 0;
-var y = 0;
+/* Variável para contagem de pontos e mudança de nível.*/
+var pontos = 0;
+var nivel = 1;
+var barreiraDePontos = 500;
+/* Centro de figura.*/
+var centroX = 150; // Rever para trocar a imagem.
+var centroY = 150; // Rever para trocar a imagem.
+var raio = 25;
+/* Contagem de tempo.*/
+var tempo = 0;
+var tSegundos = 0;
+var rate = 30;
+/* Carregando imagens.*/
+var imagemJogador;
+function preload(){
+  imagemJogador = loadImage("");
+}  
 function setup() {
   createCanvas(600, 600);
   //Roda apenas uma vez;
   //Preparação do jogo;
+  frameRate(rate);
 }
 
 function draw() {
@@ -12,10 +27,33 @@ function draw() {
   //Red (Vermelho), Green (Verde), Blue (Azul);
   //Cada uma varia de 0 a 255 cores;
   //Podem variar de forma decimal, hexadecimal;
-  background(200,0,0);
-  ellipse(x, y, 55, 55);
-  x, y = random(1,10)
-  x = x + 1;
-  y = y + 2;
-  
+  background(200, 0, 0);
+  tempo = tempo + 1;
+  tSegundos = parseInt( tempo/rate );
+  textSize(20);
+  text(tempo, 470, 30);
+  text("Tempo: "+tSegundos+" s", 470, 50);
+  textSize(24);
+  if ( dist(centroX, centroY, mouseX, mouseY) < raio ){
+    // Função dist verifica a distância entre os pontos selecionados.
+    fill(255);
+  } else {
+    fill(10);
+  }
+  if ( mouseIsPressed && dist(centroX, centroY, mouseX, mouseY) < raio ){
+    centroX = mouseX;
+    centroY = mouseY;
+  }  
+  ellipse(centroX, centroY, 2 * raio, 2 * raio);
+  // Posição em x, posição em y, largura e altura.
+  fill(135, 206, 235);
+  text("Nível: " + nivel, 30, 60);
+  text("Pontos: "+pontos, 30, 100);
+  // Incremento de pontos.
+  pontos += 10;
+  // Barreira de pontos.
+  if ( pontos > barreiraDePontos ){
+    nivel = nivel + 1;
+    barreiraDePontos = barreiraDePontos + 200; 
+  }
 }
